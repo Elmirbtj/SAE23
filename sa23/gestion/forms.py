@@ -13,3 +13,16 @@ class EtudiantForm(ModelForm):
 
         }
 
+
+
+class UniteForm(ModelForm):
+
+    class Meta:
+        model = models.Etudiant
+        fields = ('code','nom','semestre','credit')
+        labels = {
+            'code' : _('code') ,
+            'semestre': _('semestre'),
+            'credit': _('credit'),
+            'nom': _('Nom'),
+        }
