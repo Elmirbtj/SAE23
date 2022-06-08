@@ -23,6 +23,7 @@
 
         <button name="button"><a href="/gestion/affiche/{{l.id}}"> afficher les détails | </a></button> <br>
         <button name="button"><a href="/gestion/delete/{{l.id}}"> effacer | </a></button> <br>
+
 <button name="button"><a href="/gestion/update/{{l.id}}"> update </a></button>   </li>
 
 
@@ -32,9 +33,11 @@
   {%endfor%}
 
 
-<h1>erze</h1>
 
 
 {% endblock %}
 
 
+{% block navi %}
+ <li class="li2"> <a href="/gestion/ajout/{{etudiant.id}}"> ajout </a></li>
+{% endblock %}

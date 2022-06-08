@@ -15,14 +15,29 @@ class EtudiantForm(ModelForm):
 
 
 
-class UniteForm(ModelForm):
+class ExamensForm(ModelForm):
 
     class Meta:
-        model = models.Etudiant
-        fields = ('code','nom','semestre','credit')
+        model = models.Examens
+        fields = ('id','coefficient','date','titre')
         labels = {
-            'code' : _('code') ,
-            'semestre': _('semestre'),
-            'credit': _('credit'),
-            'nom': _('Nom'),
+            'id' : _('id') ,
+            'coefficient': _('coefficient'),
+            'date': _('date'),
+            'titre': _('titre'),
+        }
+        localized_fields = ('date',)
+
+
+
+class NotesForm(ModelForm):
+
+    class Meta:
+        model = models.Notes
+        fields = ('examen','etudiant','note','appreciation')
+        labels = {
+            'examen' : _('examen') ,
+            'etudiant': _('etudiant'),
+            'note': _('note'),
+            'appreciation': _('appreciation'),
         }

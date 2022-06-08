@@ -15,15 +15,43 @@ class Etudiant(models.Model):
 
 
 
-class Unite(models.Model):
-    code = models.CharField(max_length=100)
-    nom = models.CharField(max_length=100)
-    semestre = models.CharField(max_length=100)
-    credit = models.CharField(max_length=100)
+class Examens(models.Model):
+    id = models.CharField(max_length=100,primary_key=True)
+    titre = models.CharField(max_length=100)
+    date = models.DateField(blank=True, null = True)
+    coefficient = models.CharField(max_length=100)
 
     def __str__(self):
-        return  self.nom
+        return  self.titre
 
     def dico(self):
-        return {"nom": self.nom,"code": self.code,"semestre": self.semestre, "credit": self.credit,}
+        return {"id": self.id,"titre": self.titre,"date": self.date, "coefficient": self.coefficient,}
 
+
+class Examens(models.Model):
+    id = models.CharField(max_length=100, primary_key=True)
+    titre = models.CharField(max_length=100)
+    date = models.DateField(blank=True, null=True)
+    coefficient = models.CharField(max_length=100)
+
+    def __str__(self):
+        return self.titre
+
+    def dico(self):
+        return {"id": self.id, "titre": self.titre, "date": self.date, "coefficient": self.coefficient, }
+
+
+
+
+class Notes(models.Model):
+    examen = models.CharField(max_length=100)
+    etudiant =models.CharField(max_length=100)
+    note =models.IntegerField(blank=False, null=True)
+    appreciation =models.CharField(max_length=100)
+
+    def __str__(self):
+        return self.note
+
+
+def dico(self):
+    return {"examen": self.examen, "note": self.note, "etudiant": self.etudiant, "appreciation": self.appreciationt, }
