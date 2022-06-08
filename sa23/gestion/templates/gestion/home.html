@@ -1,0 +1,40 @@
+
+
+{% extends "gestion/main.html" %}
+
+
+
+
+
+
+
+
+{% block content %}
+
+
+ {% for l in liste %}
+
+
+
+<ul class="ul1">
+<h1>   {{l.nom}}</h1>>
+
+    <li class="li1">
+
+        <button name="button"><a href="/gestion/affiche/{{l.id}}"> afficher les détails | </a></button> <br>
+        <button name="button"><a href="/gestion/delete/{{l.id}}"> effacer | </a></button> <br>
+<button name="button"><a href="/gestion/update/{{l.id}}"> update </a></button>   </li>
+
+
+
+</ul>
+
+  {%endfor%}
+
+
+<h1>erze</h1>
+
+
+{% endblock %}
+
+

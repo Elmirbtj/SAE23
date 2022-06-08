@@ -1,0 +1,37 @@
+
+
+     {% extends "gestion/main.html" %}
+
+
+{% block navi %}
+ <li class="li2"> <a href="/gestion/ajout2/{{etudiant.id}}"> Pour apres</a></li>
+{% endblock %}
+
+{% block content %}
+
+
+
+
+ {% for l in liste %}
+
+
+
+<ul class="ul1">
+<h2>{{l.nom}}</h2>
+ {%endfor%}
+
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+{% endblock %}

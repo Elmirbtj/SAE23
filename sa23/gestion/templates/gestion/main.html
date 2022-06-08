@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+{% load static %}
+<link rel="stylesheet" href="{% static 'gestion/style.css' %}">
+<title>{% block title %}L'univers {% endblock %} </title>
+</head>
+
+
+<header class="entetesite">
+    <h1>ertrttrrt  </h1>
+
+
+
+
+    <div class="baree">
+        <div class="nav">
+
+            <div class="nav-bar">
+                <ul class="ul2">
+                  <li class="li2"><a href="/gestion/home"> Accueil </a></li>
+                  <li class="li2"><a href="/gestion/ajout"> OUGHO </a></li>
+
+
+
+
+
+{% block navi %}
+
+{% endblock %}
+      </ul>
+</div>
+</div>
+</div>
+
+</header>
+<div class="main">
+    {% block content %}
+
+    {% endblock%}
+</div>
+</html>
