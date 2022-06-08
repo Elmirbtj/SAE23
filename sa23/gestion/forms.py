@@ -41,3 +41,43 @@ class NotesForm(ModelForm):
             'note': _('note'),
             'appreciation': _('appreciation'),
         }
+
+
+
+
+
+class UniteForm(ModelForm):
+
+    class Meta:
+        model = models.UE
+        fields = ('code','nom','semestre','credit')
+        labels = {
+            'code' : _('code'),
+            'nom': _('nom'),
+            'semestre': _('semestre'),
+            'credit': _('credit'),
+        }
+
+
+class RessourcesForm(ModelForm):
+
+    class Meta:
+        model = models.Ressources
+        fields = ('code_ressource','nom','descriptif','coefficient')
+        labels = {
+            'code_ressource' : _('code ressource'),
+            'nom': _('nom'),
+            'descriptif': _('descriptif'),
+            'coefficient': _('coefficient'),
+        }
+
+class EnseignantForm(ModelForm):
+
+    class Meta:
+        model = models.Enseignant
+        fields = ('id','nom','prenom',)
+        labels = {
+            'id' : _('id'),
+            'nom': _('nom'),
+            'prenom': _('prenom'),
+        }

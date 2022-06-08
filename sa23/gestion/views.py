@@ -5,12 +5,20 @@ from .forms import EtudiantForm
 from .forms import ExamensForm
 from .forms import NotesForm
 
+from .forms import UniteForm
+from .forms import RessourcesForm
+from .forms import EnseignantForm
+
+
 def etudiant(request):
     return render(request,'gestion/etudiant.html')
 
 def home(request):
     liste = list(models.Etudiant.objects.all())
-    return render(request, 'gestion/home.html ', {'liste': liste,})
+    liste2 = list(models.UE.objects.all())
+    liste3 = list(models.Ressources.objects.all())
+    liste4 = list(models.Enseignant.objects.all())
+    return render(request, 'gestion/home.html ', {'liste': liste, 'liste2': liste2, 'liste3': liste3, 'liste4': liste4})
 
 def ajout(request):
     if request.method == "POST":
@@ -173,3 +181,141 @@ def delete_note(request, id):
     return HttpResponseRedirect("/gestion/note")
 
 
+
+
+#############################################
+
+def UE(request):
+    return render(request, "gestion/UE.html")
+
+def aUnite(request):
+    if request.method == "POST":
+
+        form = UniteForm(request)
+        if form.is_valid():
+            UE = form.save()
+            return render(request, "/gestion/affiche.html", {"UE": UE})
+
+        else:
+            return render(request, "gestion/aUnite.html", {"form": form})
+    else:
+        form = UniteForm()
+        return render(request, "gestion/aUnite.html", {"form": form})
+
+def tUnite(request):
+    form = UniteForm(request.POST, request.FILES)
+    if form.is_valid():
+        UE = form.save()
+        return HttpResponseRedirect("/gestion/home")
+    else:
+        return render(request, "gestion/aUnite.html", {"form": form})
+
+def UEupdate(request, id):
+    UE = models.UE.objects.get(pk=id)
+    cform = UniteForm(UE.dico())
+    return render(request, "gestion/UEupdate.html", {"eform": eform,"id":id})
+
+def tuUE(request, id):
+    cform = UniteForm(request.POST, request.FILES)
+    if cform.is_valid():
+        UE = cform.save(commit=False)
+        UE.id = id
+        UE.save()
+        return HttpResponseRedirect("/gestion/aUnite")
+    else:
+        return render(request, "gestion/UEupdate.html", {"cform": cform, "id": id})
+
+def delUE(request, id):
+    UE = models.UE.objects.get(pk=id)
+    UE.deleteUE()
+    return HttpResponseRedirect("/gestion/home")
+
+def ressources(request):
+    return render(request, "gestion/ressources.html")
+
+def ajoutressources(request):
+    if request.method == "POST":
+
+        form = RessourcesForm(request)
+        if form.is_valid():
+            ressources = form.save()
+            return render(request, "/gestion/affiche.html", {"ressources": ressources})
+
+        else:
+            return render(request, "gestion/ajoutressources.html", {"form": form})
+    else:
+        form = RessourcesForm()
+        return render(request, "gestion/ajoutressources.html", {"form": form})
+
+def traitementressources(request):
+    form = RessourcesForm(request.POST, request.FILES)
+    if form.is_valid():
+        ressources = form.save()
+        return HttpResponseRedirect("/gestion/home")
+    else:
+        return render(request, "gestion/ajoutressources.html", {"form": form})
+
+def updateressources(request, id):
+    ressources = models.ressources.objects.get(pk=id)
+    rform = RessourcesForm(ressources.dico())
+    return render(request, "gestion/updateressources.html", {"rform": rform,"id":id})
+
+def traitementupdateressources(request, id):
+    rform = RessourcesForm(request.POST, request.FILES)
+    if rform.is_valid():
+        ressources = rform.save(commit=False)
+        ressources.id = id
+        ressources.save()
+        return HttpResponseRedirect("/gestion/ajoutressources")
+    else:
+        return render(request, "gestion/updateressources.html", {"rform": rform, "id": id})
+
+def deleteressources(request, id):
+    ressources = models.Ressources.objects.get(pk=id)
+    ressources.deleteressources()
+    return HttpResponseRedirect("/gestion/home")
+
+def enseignant(request):
+    return render(request, "gestion/enseignant.html")
+
+def ajoutenseignant(request):
+    if request.method == "POST":
+
+        form = EnseignantForm(request)
+        if form.is_valid():
+            enseignant = form.save()
+            return render(request, "/gestion/affiche.html", {"enseignant": enseignant})
+
+        else:
+            return render(request, "gestion/ajoutenseignant.html", {"form": form})
+    else:
+        form = EnseignantForm()
+        return render(request, "gestion/ajoutenseignant.html", {"form": form})
+
+def traitementenseignant(request):
+    form = EnseignantForm(request.POST, request.FILES)
+    if form.is_valid():
+        enseignant = form.save()
+        return HttpResponseRedirect("/gestion/home")
+    else:
+        return render(request, "gestion/ajoutenseignant.html", {"form": form})
+
+def updateenseignant(request, id):
+    enseignant = models.Enseignant.objects.get(pk=id)
+    lform = EnseignantForm(enseignant.dico())
+    return render(request, "gestion/updateenseignant.html", {"lform": lform,"id":id})
+
+def traitementupdateenseignant(request, id):
+    lform = EnseignantForm(request.POST, request.FILES)
+    if lform.is_valid():
+        enseignant = lform.save(commit=False)
+        enseignant.id = id
+        enseignant.save()
+        return HttpResponseRedirect("/gestion/ajoutenseignant")
+    else:
+        return render(request, "gestion/updateenseignant.html", {"lform": lform, "id": id})
+
+def deleteenseignant(request, id):
+    enseignant = models.Enseignant.objects.get(pk=id)
+    enseignant.delete()
+    return HttpResponseRedirect("/gestion/home")

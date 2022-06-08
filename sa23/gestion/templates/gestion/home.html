@@ -35,6 +35,64 @@
 
 
 
+{% for l in liste2 %}
+
+
+
+<ul class="ul1">
+<h1>   {{l.code}} , {{l.nom}} , {{l.semestre}} , {{l.credit}} </h1>>
+
+    <li class="li1">
+
+        <button name="button"><a href="/gestion/affiche/{{l.id}}"> afficher les détails | </a></button> <br>
+        <button name="button"><a href="/gestion/delUE/{{l.id}}"> effacer | </a></button> <br>
+        <button name="button"><a href="/gestion/UEupdate/{{l.id}}"> update </a></button>   </li>
+
+
+
+</ul>
+
+  {%endfor%}
+
+{% for l in liste3 %}
+
+
+
+<ul class="ul1">
+<h1>   {{l.code_ressource}} , {{l.nom}} , {{l.descriptif}} , {{l.coefficient}} </h1>>
+
+    <li class="li1">
+
+        <button name="button"><a href="/gestion/affiche/{{l.id}}"> afficher les détails | </a></button> <br>
+        <button name="button"><a href="/gestion/deleteressource/{{l.id}}"> effacer | </a></button> <br>
+        <button name="button"><a href="/gestion/updateressource/{{l.id}}"> update </a></button>   </li>
+
+
+
+</ul>
+
+  {%endfor%}
+
+{% for l in liste4 %}
+
+
+
+<ul class="ul1">
+<h1>   {{l.id}} , {{l.nom}} , {{l.prenom}} </h1>>
+
+    <li class="li1">
+
+        <button name="button"><a href="/gestion/affiche/{{l.id}}"> afficher les détails | </a></button> <br>
+        <button name="button"><a href="/gestion/deleteenseignant/{{l.id}}"> effacer | </a></button> <br>
+        <button name="button"><a href="/gestion/updateenseignant/{{l.id}}"> update </a></button>   </li>
+
+
+
+</ul>
+
+  {%endfor%}
+
+
 {% endblock %}
 
 

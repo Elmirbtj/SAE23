@@ -31,6 +31,30 @@ urlpatterns = [
     path("update_note/<int:id>", views.update_note),
     path("delete_note/<int:id>", views.delete_note),
 
+    path('UE/', views.UE),
+    path('aUnite/', views.aUnite),
+    path('tUnite/', views.tUnite),
+    path("UEupdate/<int:id>", views.UEupdate),
+    path("UEdelete/<int:id>", views.delete),
+    path("delUE/<int:id>", views.delUE),
+    path('tuUE', views.tuUE),
+
+
+    path('ressources/', views.ressources),
+    path('ajoutressources/', views.ajoutressources),
+    path('traitementressources/', views.traitementressources),
+    path('traitementupdateressources/<int:id>/', views.traitementupdateressources),
+    path("updateressources/<int:id>", views.updateressources),
+    path("deleteressources/<int:id>", views.deleteressources),
+
+
+    path('enseignant/', views.enseignant),
+    path('ajoutenseignant/', views.ajoutenseignant),
+    path('traitementenseignant/', views.traitementenseignant),
+    path('traitementupdateenseignant/', views.traitementupdateenseignant),
+    path("updateenseignant/<int:id>", views.updateenseignant),
+    path("deleteenseignant/<int:id>", views.deleteenseignant),
+
 
 
 ]
