@@ -3,13 +3,16 @@ from django.db import models
 class Etudiant(models.Model):
 
     nom = models.CharField(max_length = 100)
-    date_de_decouverte = models.CharField(max_length = 100,null=True)
+    prenom =models.CharField(max_length = 100,null = True)
+    groupe =models.CharField(max_length = 100,null = True)
+    photo =models.CharField(max_length = 100,null = True)
+    email=models.EmailField(default=None,max_length = 100)
 
     def __str__(self):
         return  self.nom
 
     def dico(self):
-        return {"nom": self.nom,}
+        return {"nom": self.nom,"prenom": self.prenom,"groupe": self.groupe,"photo": self.photo," email": self. email,}
 
 
 
@@ -20,27 +23,13 @@ class Examens(models.Model):
     titre = models.CharField(max_length=100)
     date = models.DateField(blank=True, null = True)
     coefficient = models.CharField(max_length=100)
+    resource = models.ForeignKey('Ressources', on_delete=models.CASCADE,null = True,)
 
     def __str__(self):
         return  self.titre
 
     def dico(self):
-        return {"id": self.id,"titre": self.titre,"date": self.date, "coefficient": self.coefficient,}
-
-
-class Examens(models.Model):
-    id = models.CharField(max_length=100, primary_key=True)
-    titre = models.CharField(max_length=100)
-    date = models.DateField(blank=True, null=True)
-    coefficient = models.CharField(max_length=100)
-
-    def __str__(self):
-        return self.titre
-
-    def dico(self):
-        return {"id": self.id, "titre": self.titre, "date": self.date, "coefficient": self.coefficient, }
-
-
+        return {"id": self.id,"titre": self.titre,"date": self.date, "coefficient": self.coefficient,"resource": self.resource,}
 
 
 class Notes(models.Model):
@@ -54,15 +43,15 @@ class Notes(models.Model):
 
 
     def dico(self):
-        return {"examen": self.examen, "note": self.note, "etudiant": self.etudiant, "appreciation": self.appreciationt, }
+        return {"examen": self.examen, "note": self.note, "etudiant": self.etudiant, "appreciation": self.appreciation, }
 
 
 ######################################
 
 class UE(models.Model):
-    code = models.CharField(max_length=100)
+    code = models.IntegerField(blank=False, null=True)
     nom = models.CharField(max_length=100)
-    semestre = models.CharField(max_length=100)
+    semestre = models.IntegerField(blank=False, null=True)
     credit = models.CharField(max_length=100)
 
     def __str__(self):
@@ -81,7 +70,7 @@ class Ressources(models.Model):
         return  self.nom
 
     def dico(self):
-        return {"Code ressource": self.code_ressource,"nom": self.nom,"descriptif": self.descriptif, "coefficient": self.coefficient,}
+        return {"code_ressource": self.code_ressource,"nom": self.nom,"descriptif": self.descriptif, "coefficient": self.coefficient,}
 
 class Enseignant(models.Model):
     id = models.CharField(max_length=100, primary_key=True)

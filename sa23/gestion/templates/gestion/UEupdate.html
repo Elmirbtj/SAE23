@@ -2,9 +2,9 @@
      {% extends "gestion/main.html" %}
 {%block content %}
 
-    <form method="post" action="/gestion/tuUE/{{id}}/">
+    <form method="post" action="/gestion/tuUE/{{id}}">
     {% csrf_token %}
-    {{ eform.as_p }}
+    {{ form.as_p }}
 
         <input type="submit" value="envoyer les données">
     </form>

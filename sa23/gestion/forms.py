@@ -7,24 +7,25 @@ class EtudiantForm(ModelForm):
 
     class Meta:
         model = models.Etudiant
-        fields = ('nom',)
+        fields = ('nom','prenom','groupe','groupe','photo','email')
         labels = {
             'nom' : _('Nom') ,
-
+            'prenom ': _('prenom '),
+            'groupe': _('groupe'),
+            'photo': _('photo'),
+            'email': _('email'),
         }
-
-
-
 class ExamensForm(ModelForm):
 
     class Meta:
         model = models.Examens
-        fields = ('id','coefficient','date','titre')
+        fields = ('id','coefficient','date','titre','resource')
         labels = {
             'id' : _('id') ,
             'coefficient': _('coefficient'),
             'date': _('date'),
             'titre': _('titre'),
+            'resource': _('resource'),
         }
         localized_fields = ('date',)
 
@@ -63,12 +64,13 @@ class RessourcesForm(ModelForm):
 
     class Meta:
         model = models.Ressources
-        fields = ('code_ressource','nom','descriptif','coefficient')
+        fields = ('code_ressource','nom','descriptif','coefficient',)
         labels = {
             'code_ressource' : _('code ressource'),
             'nom': _('nom'),
             'descriptif': _('descriptif'),
             'coefficient': _('coefficient'),
+
         }
 
 class EnseignantForm(ModelForm):

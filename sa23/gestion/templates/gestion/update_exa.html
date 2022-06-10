@@ -2,7 +2,7 @@
      {% extends "gestion/main.html" %}
 {%block content %}
 
-    <form method="post" action="/gestion/traitementupdate_exa/{{id}}/">
+    <form method="post" action="/gestion/traitementupdate_exa/{{id}}">
     {% csrf_token %}
     {{ exform.as_p }}
 
