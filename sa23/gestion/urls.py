@@ -16,8 +16,8 @@ urlpatterns = [
 
     path('examens/', views.examens),
     path('ajout_exa/', views.ajout_exa),
-    path('traitement_exa/<int:id>', views.traitement_exa),
-    path('affiche_exa/<int:id>', views.affiche_exa),
+    path('traitement_exa/', views.traitement_exa),
+    path('affiche_exa/<int:id>/', views.affiche_exa),
     path('traitementupdate_exa/<int:id>', views.traitementupdate_exa),
     path("update_exa/<int:id>", views.update_exa),
     path("delete_exa/<int:id>", views.delete_exa),
@@ -40,7 +40,7 @@ urlpatterns = [
     path('tuUE/<int:id>', views.tuUE),
 
 
-    path('ressources/', views.ressources),
+    path('ressourcess/', views.ressourcess),
     path('ajoutressources/', views.ajoutressources),
     path('traitementressources/', views.traitementressources),
     path('traitementupdateressources/<int:id>', views.traitementupdateressources),

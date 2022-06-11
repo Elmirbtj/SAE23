@@ -4,14 +4,22 @@
 {%block content %}
 
 
-<form method="post"  enctype="multipart/form-data" action="/gestion/traitement_exa/">
+<form method="post"  enctype="multipart/form-data" action="/gestion/ajout_exa/">
 
 {% csrf_token %}
 
 {{ form.as_p }}
 
-<input type="submit" value="envoyer␣les␣données"\>
+<input type="submit" value="envoyer␣les␣données">
 </form>
 
-
 {% endblock %}
+
+
+
+
+
+
+
+
+

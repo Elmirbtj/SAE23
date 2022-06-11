@@ -74,43 +74,48 @@ def delete(request, id):
 
 def examens(request):
     liste1 = list(models.Examens.objects.all())
-    return render(request, 'gestion/examens.html ', {'liste1': liste1,})
+    liste2 = list(models.Ressources.objects.all())
+    return render(request, 'gestion/examens.html ', {'liste1': liste1,'liste2': liste2,})
 
 def ajout_exa(request):
     if request.method == "POST":
-        ressources = models.Ressources.objects.get(pk=id)
-        form = ExamensForm(request)
+
+        form = ExamensForm(request.POST)
         if form.is_valid():
 
+
             examens = form.save(commit=False)
-            examens.ressources = ressources
-            examens.ressources_id = id
+
+
             examens.save()
             return HttpResponseRedirect("/gestion/affiche_res")
 
         else:
-            return render(request, "gestion/ajout_exa.html", {"form": form, "id": id})
+            return render(request, "gestion/ajout_exa.html", {"form": form})
     else:
         form = ExamensForm()
-        return render(request, "gestion/ajout_exa.html", {"form": form, "id": id})
+        return render(request, "gestion/ajout_exa.html", {"form": form})
 
 
-def traitement_exa(request, id):
-    exform = ExamensForm(request.POST)
+def traitement_exa(request):
+    form = ExamensForm(request.POST)
     ressources = models.Ressources.objects.get(pk=id)
-    if exform.is_valid():
-        examens = exform.save(commit=False)
+    if form.is_valid():
+
+        examens = form.save(commit=False)
+
         examens.ressources = ressources
-        examens.ressources_id = id
+        examens.ressoruces_id = id
         examens.save()
-        return HttpResponseRedirect("/gestion/affiche_res/"+ str(id))
+        return HttpResponseRedirect("/gestion/home/"+ str(id))
     else:
-        return render(request, "gestion/ajout_exa.html", {"exform": exform})
+        return render(request, "gestion/ajout_exa.html", {"form": form})
 
 def affiche_exa(request, id):
     examens = models.Examens.objects.get(pk=id)
+    liste1 = list(models.Notes.objects.filter(examens=examens))
 
-    return render(request,"gestion/affiche_exa.html",{"examens": examens})
+    return render(request,"gestion/affiche_exa.html",{"examens": examens ,"liste1":liste1})
 
 def update_exa(request, id):
     examens = models.Examens.objects.get(pk=id)
@@ -130,7 +135,7 @@ def traitementupdate_exa(request, id):
 
 def delete_exa(request, id):
     examens = models.Examens.objects.get(pk=id)
-    examens_id = examens.id
+    examens_id = examens.ressources_id
     examens.delete()
     return HttpResponseRedirect(f"/gestion/affiche_res/{examens_id}")
 
@@ -145,10 +150,11 @@ def note(request):
 def ajout_note(request):
     if request.method == "POST":
 
-        form = NotesForm(request)
+        form = NotesForm(request.POST)
         if form.is_valid():
-            note = form.save()
-            return render(request,"/note/affiche_note.html",{"note" : note})
+            note = form.save(commit=False)
+            note.save()
+            return HttpResponseRedirect("/gestion/home/")
 
         else:
             return render(request,"note/ajout_note.html",{"form": form})
@@ -158,8 +164,13 @@ def ajout_note(request):
 
 def traitement_note(request):
     form = NotesForm(request.POST, request.FILES)
+    #examens = models.Examens.objects.get(pk=id)
     if form.is_valid():
-        note = form.save()
+        note = form.save(commit=False)
+
+        #note.examens = examens
+        #note.examens_id = id
+        note.save()
         return HttpResponseRedirect("/gestion/note")
     else:
         return render(request,"note/ajout_note.html",{"form": form})
@@ -240,7 +251,7 @@ def delUE(request, id):
     UE.delete()
     return HttpResponseRedirect("/gestion/home")
 
-def ressources(request):
+def ressourcess(request):
     return render(request, "gestion/ressources.html")
 
 def ajoutressources(request):
@@ -282,14 +293,14 @@ def traitementupdateressources(request, id):
 
 def affiche_res(request, id):
     ressources = models.Ressources.objects.get(pk=id)
-    liste7 = list(models.Examens.objects.filter(id=id))
+    liste7 = list(models.Examens.objects.filter(ressources=ressources))
 
     return render(request,"gestion/affiche_res.html",{"ressources": ressources,"liste7": liste7})
 
 def deleteressources(request, id):
     ressources = models.Ressources.objects.get(pk=id)
     ressources.delete()
-    return HttpResponseRedirect("/gestion/home")
+    return HttpResponseRedirect("/gestion/home/")
 
 def enseignant(request):
     return render(request, "gestion/enseignant.html")
