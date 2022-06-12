@@ -1,10 +1,24 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-<p>rezzreerzerzezrerzzerzerzerzerezr</p>
-</body>
-</html>
+
+     {% extends "gestion/main.html" %}
+
+
+{% block content %}
+<style>
+{% load static %}
+body{background-color: brown;}
+</style>
+
+
+<h1>{{etudiants.nom}}</h1>
+<h1>{{etudiants.email}}</h1>
+
+ {% for l in notes %}
+
+
+     <h1>{{l.note}}</h1>
+     <h1>{{l.etudiant}}</h1>
+<h1>{{l.appreciation}}</h1>
+       {%endfor%}
+
+
+{% endblock %}

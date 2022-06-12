@@ -10,8 +10,16 @@ from .forms import RessourcesForm
 from .forms import EnseignantForm
 
 
-def etudiant(request):
-    return render(request,'gestion/etudiant.html')
+
+def etudiant(request,id):
+    etudiants = models.Etudiant.objects.get(pk=id)
+    notes = list(models.Notes.objects.filter(etudiant=etudiants))
+    moyenne = 0
+    for i in notes:
+        moyenne = moyenne + i.note
+    etudiant.moyenne = str(round((moyenne / 5) * 100, 2)) + "%"
+
+    return render(request, 'gestion/etudiant.html', {'etudiants': etudiants,'notes': notes,"etudiant.moyenne":etudiant.moyenne})
 
 def home(request):
     liste = list(models.Etudiant.objects.all())
@@ -43,9 +51,12 @@ def traitement(request):
         return render(request,"gestion/ajout.html",{"form": form})
 
 def affiche(request, id):
-    etudiant = models.Etudiant.objects.get(pk=id)
+    etudiants = models.Etudiant.objects.get(pk=id)
+    notes = list(models.Notes.objects.filter(etudiant=etudiants))
 
-    return render(request,"gestion/affiche.html",{"etudiant": etudiant})
+    return render(request,"gestion/affiche.html",{'etudiants': etudiants,'notes': notes,})
+
+
 
 def update(request, id):
     etudiant = models.Etudiant.objects.get(pk=id)
@@ -88,7 +99,7 @@ def ajout_exa(request):
 
 
             examens.save()
-            return HttpResponseRedirect("/gestion/affiche_res")
+            return HttpResponseRedirect("/gestion/home/")
 
         else:
             return render(request, "gestion/ajout_exa.html", {"form": form})
@@ -294,6 +305,7 @@ def traitementupdateressources(request, id):
 def affiche_res(request, id):
     ressources = models.Ressources.objects.get(pk=id)
     liste7 = list(models.Examens.objects.filter(ressources=ressources))
+
 
     return render(request,"gestion/affiche_res.html",{"ressources": ressources,"liste7": liste7})
 

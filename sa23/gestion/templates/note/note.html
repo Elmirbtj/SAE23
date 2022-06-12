@@ -11,6 +11,7 @@
 {% block content %}
 
 
+<h1><button name="button"><a href="/gestion/ajout_note/{{examens}}"> Ajout d'une note| </a></button> <br></h1>
  {% for l in liste_note %}
 
 
@@ -38,7 +39,4 @@
 {% endblock %}
 
 
-{% block navi %}
- <li class="li2"> <a href="/gestion/ajout_note/{{examens}}"> ajouter un examens </a></li>
-{% endblock %}
 

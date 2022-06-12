@@ -16,8 +16,6 @@ class Etudiant(models.Model):
 
 
 
-
-
 class Examens(models.Model):
     titre = models.CharField(max_length=100)
     date = models.DateField(blank=True, null = True)
@@ -33,7 +31,7 @@ class Examens(models.Model):
 
 class Notes(models.Model):
     examens = models.ForeignKey('Examens', on_delete=models.CASCADE,null = True,)
-    etudiant =models.CharField(max_length=100)
+    etudiant =models.ForeignKey('Etudiant', on_delete=models.CASCADE,null = True,)
     note =models.IntegerField(blank=False, null=True)
     appreciation =models.CharField(max_length=100)
 

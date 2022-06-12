@@ -7,31 +7,39 @@
  <li class="li2"> <a href="/gestion/ajout2/{{etudiant.id}}"> Pour apres</a></li>
 {% endblock %}
 
+
+
 {% block content %}
+<style>
+{% load static %}
+body{background-color: brown;}
+</style>
+{{etudiant.moyenne}}
+
+<h1>{{etudiants.nom}}</h1>
 
 
+ {% for l in notes %}
+
+     <h1>l'etudiant :{{l.etudiant}} a eu la note de {{l.note}}/20, dans l'examens de {{l.examens}} </h1>
+<h1>{{etudiants.email}}</h1>
+<h1>{{l.appreciation}}</h1>
 
 
- {% for l in liste %}
-
-
-
-<ul class="ul1">
-<h2>{{l.nom}}</h2>
- {%endfor%}
-
-</ul>
-
-
-
-
-
-
-
-
-
-
-
+       {%endfor%}
 
 
 {% endblock %}
+
+
+
+
+
+
+
+
+
+
+
+
+
