@@ -63,12 +63,14 @@ class Ressources(models.Model):
     nom = models.CharField(max_length=100)
     descriptif = models.CharField(max_length=100)
     coefficient = models.CharField(max_length=100)
+    competence = models.ManyToManyField("UE",null=True, blank=True)
+
 
     def __str__(self):
         return  self.nom
 
     def dico(self):
-        return {"code_ressource": self.code_ressource,"nom": self.nom,"descriptif": self.descriptif, "coefficient": self.coefficient}
+        return {"code_ressource": self.code_ressource,"nom": self.nom,"descriptif": self.descriptif, "coefficient": self.coefficient,"competence": self.competence}
 
 class Enseignant(models.Model):
 

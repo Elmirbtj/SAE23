@@ -38,6 +38,7 @@ urlpatterns = [
     path("UEdelete/<int:id>", views.delete),
     path("delUE/<int:id>", views.delUE),
     path('tuUE/<int:id>', views.tuUE),
+    path('affiche_ue/<int:id>', views.affiche_ue),
 
 
     path('ressourcess/', views.ressourcess),

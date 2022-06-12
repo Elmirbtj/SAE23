@@ -6,35 +6,19 @@
 
 {% block content %}
 
-
- {% for l in liste7 %}
-
-
-
-<ul class="ul1">
-<h1>   {{l.titre}}</h1>>
-
-    <li class="li1">
-
-        <button name="button"><a href="/gestion/affiche_exa/{{l.id}}"> afficher les détails | </a></button> <br>
-        <button name="button"><a href="/gestion/delete_exa/{{l.id}}"> effacer | </a></button> <br>
-<button name="button"><a href="/gestion/update_exa/{{l.id}}"> update </a></button>   </li>
-
-
-
-</ul>
-
-  {%endfor%}
-
-
-
+<h1>Les notes des étudiants</h1>
 
  {% for l in liste1 %}
 
 
 
 <ul class="ul1">
-<h1>   {{l.etudiant}}</h1>>
+
+<h2>   Nom de l'etudiant : {{l.etudiant}}</h2>
+
+<h2> La note : {{l.note}}/20</h2>
+
+<h2>Appreciation donner :  {{l.appreciation}}</h2>
 
     <li class="li1">
 
@@ -58,5 +42,5 @@
 
 
 {% block navi %}
- <li class="li2"> <a href="/gestion/ajout_exa/"> ajouter un examens </a></li>
+ <li><a href="/gestion/ajout_exa/"> ajouter un examens | </a></li>
 {% endblock %}

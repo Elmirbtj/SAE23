@@ -17,12 +17,18 @@
 
 
 <ul class="ul1">
-<h1>   {{l.nom}}</h1>>
 
+<h2> nom de l'etudiant : {{l.nom}}</h2>
+
+<h2>  Groupe : {{l.groupe}}</h2>
+
+<h2>   photo elle vient apres : {{l.photo}}</h2>
+
+<h2>Email : {{l.email}} </h2>
     <li class="li1">
 
-        <button name="button"><a href="/gestion/affiche/{{l.id}}"> afficher les détails | </a></button> <br>
-        <button name="button"><a href="/gestion/delete/{{l.id}}"> effacer | </a></button> <br>
+        <button name="button"><a href="/gestion/affiche/{{l.id}}"> afficher les détails | </a></button>
+        <button name="button"><a href="/gestion/delete/{{l.id}}"> effacer | </a></button>
 
 <button name="button"><a href="/gestion/update/{{l.id}}"> update </a></button>   </li>
 
@@ -40,12 +46,18 @@
 
 
 <ul class="ul1">
-<h1>   {{l.code}} , {{l.nom}} , {{l.semestre}} , {{l.credit}} </h1>>
 
+<h2> code de la competence : {{l.code}}</h2>
+
+<h2>  nom de la competence : {{l.nom}}</h2>
+
+<h2>   competence du semestre : {{l.semestre}}</h2>
+
+<h2> Competence : {{l.credit}} </h2>
     <li class="li1">
 
-        <button name="button"><a href="/gestion/affiche/{{l.id}}"> afficher les détails | </a></button> <br>
-        <button name="button"><a href="/gestion/delUE/{{l.id}}"> effacer | </a></button> <br>
+        <button name="button"><a href="/gestion/affiche_ue/{{l.id}}"> afficher les détails | </a></button>
+        <button name="button"><a href="/gestion/delUE/{{l.id}}"> effacer | </a></button>
         <button name="button"><a href="/gestion/UEupdate/{{l.id}}"> update </a></button>   </li>
 
 
@@ -59,12 +71,18 @@
 
 
 <ul class="ul1">
-<h1>   {{l.code_ressource}} , {{l.nom}} , {{l.descriptif}} , {{l.coefficient}} </h1>>
+<h2> code de la ressourse : {{l.code_ressource}}</h2>
+
+<h2>  nom de la ressource : {{l.nom}}</h2>
+
+<h2>   description {{l.descriptif}}</h2>
+
+<h2> coefficient de la ressource : {{l.coefficient}} </h2>
 
     <li class="li1">
 
-        <button name="button"><a href="/gestion/affiche_res/{{l.id}}"> afficher les détails | </a></button> <br>
-        <button name="button"><a href="/gestion/deleteressources/{{l.id}}"> effacer | </a></button> <br>
+        <button name="button"><a href="/gestion/affiche_res/{{l.id}}"> afficher les détails | </a></button>
+        <button name="button"><a href="/gestion/deleteressources/{{l.id}}"> effacer | </a></button>
         <button name="button"><a href="/gestion/updateressources/{{l.id}}"> update </a></button>   </li>
 
 
@@ -78,12 +96,14 @@
 
 
 <ul class="ul1">
-<h1>   {{l.id}} , {{l.nom}} , {{l.prenom}} </h1>>
+<h1>  Nom enseignat : {{l.nom}}
+
+    prenom enseignant : {{l.prenom}} </h1>
 
     <li class="li1">
 
-        <button name="button"><a href="/gestion/affiche/{{l.id}}"> afficher les détails | </a></button> <br>
-        <button name="button"><a href="/gestion/deleteenseignant/{{l.id}}"> effacer | </a></button> <br>
+        <button name="button"><a href="/gestion/affiche/{{l.id}}"> afficher les détails | </a></button>
+        <button name="button"><a href="/gestion/deleteenseignant/{{l.id}}"> effacer | </a></button>
         <button name="button"><a href="/gestion/updateenseignant/{{l.id}}"> update </a></button>   </li>
 
 
@@ -97,5 +117,5 @@
 
 
 {% block navi %}
- <li class="li2"> <a href="/gestion/ajout/{{etudiant.id}}"> ajouter un etudiant </a></li>
+ <li> <a href="/gestion/ajout/{{etudiant.id}}"> ajouter un etudiant </a></li>
 {% endblock %}

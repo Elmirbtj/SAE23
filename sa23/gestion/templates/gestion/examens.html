@@ -11,12 +11,13 @@
 {% block content %}
 
 
+<div class="ajout">
+<button name="button"><a href="/gestion/ajout_exa/{{ressources.id}}"> ajouter un examens </a></button>
+</div>
  {% for l in liste1 %}
 
-
-
 <ul class="ul1">
-<h1>   {{l.titre}}</h1>>
+<h1>   {{l.titre}}</h1>
 
     <li class="li1">
 
@@ -32,11 +33,11 @@
 
 
 
+
+
+{% endblock %}
+
 {% block navi %}
- <li class="li2"> <a href="/gestion/ajout_exa/{{ressources.id}}"> ajouter un examens </a></li>
+ <li> <a href="/gestion/ajout_exa/{{ressources.id}}"> ajouter un examens </a></li>
 {% endblock %}
-
-{% endblock %}
-
-
 

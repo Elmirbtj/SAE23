@@ -12,7 +12,17 @@
 
 
 <ul class="ul1">
-<h1>   {{l.titre}}</h1>>
+<h2>   nom de l'examen : {{l.titre}}</h2>
+    <br>
+
+<h2>   date prevue pour l'examen : {{l.date}}</h2>
+ <br>
+
+<h2> coefficient pour cette examen : {{l.coefficient}}</h2>
+     <br>
+
+<h1>   {{l.ressources}}</h1>
+
 
     <li class="li1">
 
@@ -20,7 +30,7 @@
         <button name="button"><a href="/gestion/delete_exa/{{l.id}}"> effacer | </a></button> <br>
 <button name="button"><a href="/gestion/update_exa/{{l.id}}"> update </a></button>   </li>
 
-
+</li>
 
 </ul>
 
@@ -32,5 +42,5 @@
 
 
 {% block navi %}
- <li class="li2"> <a href="/gestion/ajout_exa/"> ajouter un examens </a></li>
+ <li> <a href="/gestion/ajout_exa/"> ajouter un examens | </a></li>
 {% endblock %}

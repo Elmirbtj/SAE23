@@ -226,7 +226,7 @@ def aUnite(request):
         form = UniteForm(request)
         if form.is_valid():
             UE = form.save()
-            return render(request, "/gestion/affiche.html", {"UE": UE})
+            return render(request, "/gestion/affiche_ue.html", {"UE": UE})
 
         else:
             return render(request, "gestion/aUnite.html", {"form": form})
@@ -256,6 +256,14 @@ def tuUE(request, id):
         return HttpResponseRedirect("/gestion/home")
     else:
         return render(request, "gestion/UEupdate.html", {"eform": eform, "id": id})
+
+def affiche_ue(request, id):
+    UE = models.UE.objects.get(pk=id)
+    ressources = list(models.Ressources.objects.filter(competence=UE))
+
+
+    return render(request,"gestion/affiche_ue.html",{'UE': UE,'ressources':ressources})
+
 
 def delUE(request, id):
     UE = models.UE.objects.get(pk=id)

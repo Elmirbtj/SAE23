@@ -1,0 +1,41 @@
+
+
+     {% extends "gestion/main.html" %}
+
+
+
+{% block content %}
+
+
+
+
+ {% for l in ressources %}
+
+
+
+<ul class="ul1">
+<h1>   {{l.nom}}<br>
+{{l.descriptif}}
+
+</h1>
+
+    <li class="li1">
+
+
+{{UE.nom}}
+{{UE.credit}}
+
+
+
+</ul>
+
+  {%endfor%}
+
+
+
+{% endblock %}
+
+
+{% block navi %}
+ <li> <a href="/gestion/ajout_exa/"> ajouter un examens | </a></li>
+{% endblock %}

@@ -64,12 +64,13 @@ class RessourcesForm(ModelForm):
 
     class Meta:
         model = models.Ressources
-        fields = ('code_ressource','nom','descriptif','coefficient',)
+        fields = ('code_ressource','nom','descriptif','coefficient','competence')
         labels = {
             'code_ressource' : _('code ressource'),
             'nom': _('nom'),
             'descriptif': _('descriptif'),
             'coefficient': _('coefficient'),
+            'competence': _('competence'),
 
         }
 
