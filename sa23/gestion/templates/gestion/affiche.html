@@ -11,14 +11,20 @@
 {% load static %}
 body{background-color: brown;}
 </style>
-{{etudiant.moyenne}}
+<h1>
+Moyenne de l'etudiant : {{etudiants.moyenne}}
+
+    {{moyenne_arondie}}
+
+</h1>
+
 
 <h1>{{etudiants.nom}}</h1>
 
 
  {% for l in notes %}
 
-     <h1>l'etudiant :{{l.etudiant}} a eu la note de {{l.note}}/20, dans l'examens de {{l.examens}} </h1>
+<h1>l'etudiant :{{l.etudiant}} a eu la note de {{l.note}}/20, dans l'examens de {{l.examens}} </h1>
 <h1>{{etudiants.email}}</h1>
 <h1>{{l.appreciation}}</h1>
 

@@ -5,14 +5,14 @@ class Etudiant(models.Model):
     nom = models.CharField(max_length = 100)
     prenom =models.CharField(max_length = 100,null = True)
     groupe =models.CharField(max_length = 100,null = True)
-    photo =models.CharField(max_length = 100,null = True)
+    photo =models.ImageField(upload_to="images",blank=True, null = True)
     email=models.EmailField(default=None,max_length = 100)
 
     def __str__(self):
         return  self.nom
 
     def dico(self):
-        return {"nom": self.nom,"prenom": self.prenom,"groupe": self.groupe,"photo": self.photo," email": self. email,}
+        return {"nom": self.nom,"prenom": self.prenom,"groupe": self.groupe,"photo": self.photo,"email": self.email,}
 
 
 

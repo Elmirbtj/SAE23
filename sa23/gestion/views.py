@@ -54,8 +54,15 @@ def traitement(request):
 def affiche(request, id):
     etudiants = models.Etudiant.objects.get(pk=id)
     notes = list(models.Notes.objects.filter(etudiant=etudiants))
+    notes = list(models.Notes.objects.filter(etudiant=etudiants))
+    moyenne = float(0)
+    moyenne_arondie = 0
+    for i in notes:
+        moyenne = float(moyenne + i.note)
+    etudiants.moyenne = str(round(moyenne / len(notes),2))
 
-    return render(request,"gestion/affiche.html",{'etudiants': etudiants,'notes': notes,})
+
+    return render(request,"gestion/affiche.html",{'etudiants': etudiants,'notes': notes,"etudiants.moyenne":etudiants.moyenne,})
 
 
 
@@ -78,7 +85,7 @@ def traitementupdate(request, id):
 def delete(request, id):
     etudiant = models.Etudiant.objects.get(pk=id)
     etudiant.delete()
-    return HttpResponseRedirect("/gestion/home")
+    return HttpResponseRedirect("/gestion/etudiant/")
 
 
 
@@ -244,6 +251,7 @@ def tUnite(request):
         return render(request, "gestion/aUnite.html", {"form": form})
 
 def UEupdate(request, id):
+
     UE = models.UE.objects.get(pk=id)
     form = UniteForm(UE.dico())
     return render(request, "gestion/UEupdate.html", {"form": form,"id":id})

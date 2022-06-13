@@ -2,28 +2,34 @@
      {% extends "gestion/main.html" %}
 
 
+
 {% block content %}
+<h2><button name="button"><a href="/gestion/ajout/{{etudiant.id}}"> Ajout d'une note| </a></button> <br></h2>
+
   <ul class="ul3">
 
    {% for l in liste_etu %}
 
-
-
 <div class="grid-container">
     <div class="grid-item">
+
+    {% if l.photo %}
+<h1>   {{l.nom}}</h1>
+<img src="{{l.photo.url}} " class="img1">
+{% endif %}
 <p> nom de l'etudiant : {{l.nom}}</p>
 
 <p>  Groupe : {{l.groupe}}</p>
 
-<p>   photo elle vient apres : {{l.photo}}</p>
+
 
 <p>Email : {{l.email}} </p>
-    <li class="li1">
+<li class="li1">
 
-        <button name="button"><a href="/gestion/affiche/{{l.id}}"> afficher les détails | </a></button>
-        <button name="button"><a href="/gestion/delete/{{l.id}}"> effacer | </a></button>
-
-<button name="button"><a href="/gestion/update/{{l.id}}"> update </a></button>   </li>
+<button name="button"><a href="/gestion/affiche/{{l.id}}"> afficher les détails  </a></button>
+<button name="button"><a href="/gestion/delete/{{l.id}}"> effacer  </a></button>
+<button name="button"><a href="/gestion/update/{{l.id}}"> update </a></button>
+</li>
 </div>
 </div>
 

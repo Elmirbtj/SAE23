@@ -38,8 +38,8 @@ text-align : center;
 	display: block;
 	border: 0;
   margin: auto;
-	width: 60%;
-	height:300px;
+width: 60%;
+    height: 12vw;
 
 
 }
@@ -105,7 +105,7 @@ input[type=submit],button{
 
     #background:#404040;
     font-family:system-ui,arial;
-    font-size:110%;
+    font-size:130%;
 }
 
 input[type=text],input[type=number],textarea,select,option{
@@ -325,19 +325,9 @@ margin:20px;
 
 
 }
-.eleve{
-
-writing-mode: horizontal-tb;
-background-color: yellow;
-
-}
-
-
 
 .grid-container {
-
   grid-template-columns: auto auto auto;
-
   padding: 5px;
 }
 .grid-item {
@@ -348,7 +338,6 @@ background-color: yellow;
   text-align: center;
 }
 
-
 .ul3 input[type=submit],button{
 font-size: 90%;
 liste:none;
@@ -357,8 +346,7 @@ liste:none;
 }
 .li1{
 
-
+font-size: 110%;
     list-style-type:none;
-
 
 }

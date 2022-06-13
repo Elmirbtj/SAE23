@@ -18,14 +18,19 @@
 {{l.descriptif}}
 
 </h1>
-
+{{UE.nom}}
+{{UE.credit}}
     <li class="li1">
 
 
-{{UE.nom}}
-{{UE.credit}}
 
 
+
+        <button name="button"><a href="/gestion/affiche_ue{{l.id}}"> afficher les détails  </a></button> <br>
+        <button name="button"><a href="/gestion/deleteressources/{{l.id}}"> effacer  </a></button> <br>
+<button name="button"><a href="/gestion/updateressources/{{l.id}}"> update </a></button>   </li>
+
+</li>
 
 </ul>
 
