@@ -3,6 +3,35 @@
 
 
 {% block content %}
+  <ul class="ul3">
+
+   {% for l in liste_etu %}
+
+
+
+<div class="grid-container">
+    <div class="grid-item">
+<p> nom de l'etudiant : {{l.nom}}</p>
+
+<p>  Groupe : {{l.groupe}}</p>
+
+<p>   photo elle vient apres : {{l.photo}}</p>
+
+<p>Email : {{l.email}} </p>
+    <li class="li1">
+
+        <button name="button"><a href="/gestion/affiche/{{l.id}}"> afficher les détails | </a></button>
+        <button name="button"><a href="/gestion/delete/{{l.id}}"> effacer | </a></button>
+
+<button name="button"><a href="/gestion/update/{{l.id}}"> update </a></button>   </li>
+</div>
+</div>
+
+
+  {%endfor%}
+
+
+{% endblock %}
 <style>
 {% load static %}
 body{background-color: brown;}
@@ -19,6 +48,3 @@ body{background-color: brown;}
      <h1>{{l.etudiant}}</h1>
 <h1>{{l.appreciation}}</h1>
        {%endfor%}
-
-
-{% endblock %}

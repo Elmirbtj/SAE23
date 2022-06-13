@@ -12,31 +12,6 @@
 {% block content %}
 
 
- {% for l in liste %}
-
-
-
-<ul class="ul1">
-
-<h2> nom de l'etudiant : {{l.nom}}</h2>
-
-<h2>  Groupe : {{l.groupe}}</h2>
-
-<h2>   photo elle vient apres : {{l.photo}}</h2>
-
-<h2>Email : {{l.email}} </h2>
-    <li class="li1">
-
-        <button name="button"><a href="/gestion/affiche/{{l.id}}"> afficher les détails | </a></button>
-        <button name="button"><a href="/gestion/delete/{{l.id}}"> effacer | </a></button>
-
-<button name="button"><a href="/gestion/update/{{l.id}}"> update </a></button>   </li>
-
-
-
-</ul>
-
-  {%endfor%}
 
 
 

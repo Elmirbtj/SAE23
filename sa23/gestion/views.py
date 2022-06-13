@@ -11,15 +11,16 @@ from .forms import EnseignantForm
 
 
 
-def etudiant(request,id):
-    etudiants = models.Etudiant.objects.get(pk=id)
-    notes = list(models.Notes.objects.filter(etudiant=etudiants))
-    moyenne = 0
-    for i in notes:
-        moyenne = moyenne + i.note
-    etudiant.moyenne = str(round((moyenne / 5) * 100, 2)) + "%"
+def etudiant(request):
+    #etudiants = models.Etudiant.objects.get(pk=id)
+    liste_etu = list(models.Etudiant.objects.all())
+    #notes = list(models.Notes.objects.filter(etudiant=etudiants))
+   # moyenne = 0
+    #for i in notes:
+    #  moyenne = moyenne + i.note
+  # etudiant.moyenne = str(round((moyenne / len(notes)) * 100, 2)) + "%"
 
-    return render(request, 'gestion/etudiant.html', {'etudiants': etudiants,'notes': notes,"etudiant.moyenne":etudiant.moyenne})
+    return render(request, 'gestion/etudiant.html', {'liste_etu':liste_etu,})#'etudiants': etudiants,'notes': notes,"etudiant.moyenne":etudiant.moyenne
 
 def home(request):
     liste = list(models.Etudiant.objects.all())
