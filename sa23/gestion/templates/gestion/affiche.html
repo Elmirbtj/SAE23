@@ -7,10 +7,10 @@
 
 
 {% block content %}
-<style>
-{% load static %}
-body{background-color: brown;}
-</style>
+
+
+
+
 <h1>
 Moyenne de l'etudiant : {{moyenne}}
 
@@ -18,14 +18,36 @@ Moyenne de l'etudiant : {{moyenne}}
 
 </h1>
 
-
 <h1>{{etudiants.nom}}</h1>
+<div class="Titre">
+<h3>YOYOYOYOYOYOYOY</h3>
+</div>
+<table class="table">
 
- {% for l in notes %}
+<tr>
+<th>Examens</th>
+<th> note</th>
+</tr>
+{% for l in notes %}
+<tr>
+<td>{{l.examens}}</td>
+<td>{{l.note}}/20</td>
+<td>{{examen.coefficient}}</td>
+</tr>
+
+{%endfor%}
+<td>Moyenne de l'etudiant </td>
+<td>{{moyenne}}</td>
+</table>
+
+
+
+
+
+
      <h1>l'etudiant :{{l.etudiant}} a eu la note de {{l.note}}/20, dans l'examens de {{l.examens}} </h1>
      <h1>{{etudiants.email}}</h1>
      <h1>{{l.appreciation}}</h1>
- {%endfor%}
 
 
 {% endblock %}

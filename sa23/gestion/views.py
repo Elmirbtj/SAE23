@@ -27,16 +27,14 @@ def home(request):
     liste2 = list(models.UE.objects.all())
     liste3 = list(models.Ressources.objects.all())
     liste4 = list(models.Enseignant.objects.all())
-    return render(request, 'gestion/home.html ', {'liste': liste, 'liste2': liste2,'liste3': liste3,'liste4': liste4,})
+    return render(request,'gestion/home.html',{'liste': liste, 'liste2': liste2,'liste3': liste3,'liste4': liste4,})
 
 def ajout(request):
     if request.method == "POST":
-
         form = EtudiantForm(request)
         if form.is_valid():
             etudiant = form.save()
             return render(request,"/gestion/affiche.html",{"etudiant" : etudiant})
-
         else:
             return render(request,"gestion/ajout.html",{"form": form})
     else :
@@ -66,14 +64,14 @@ def affiche(request, id):
     if coeff != 0:
         moyenne = round(moyenne/coeff,2)
         print(f'{moyenne}')
-    return render(request,"gestion/affiche.html",{'etudiants': etudiant,'notes': notes,"moyenne":moyenne})
+    return render(request,"gestion/affiche.html",{'etudiants': etudiant,'notes': notes,"moyenne":moyenne,"examen": examen})
 
 
 
 def update(request, id):
     etudiant = models.Etudiant.objects.get(pk=id)
     eform = EtudiantForm(etudiant.dico())
-    return render(request, "gestion/update.html", {"eform": eform,"id":id})
+    return render(request,"gestion/update.html",{"eform": eform,"id":id})
 
 def traitementupdate(request, id):
     eform = EtudiantForm(request.POST, request.FILES)
@@ -83,7 +81,7 @@ def traitementupdate(request, id):
         etudiant.save()
         return HttpResponseRedirect("/gestion/ajout")
     else:
-        return render(request, "gestion/update.html", {"eform": eform, "id": id})
+        return render(request,"gestion/update.html",{"eform": eform, "id": id})
 
 
 def delete(request, id):
@@ -98,26 +96,21 @@ def delete(request, id):
 def examens(request):
     liste1 = list(models.Examens.objects.all())
     liste2 = list(models.Ressources.objects.all())
-    return render(request, 'gestion/examens.html ', {'liste1': liste1,'liste2': liste2,})
+    return render(request,'gestion/examens.html',{'liste1': liste1,'liste2': liste2,})
 
 def ajout_exa(request):
     if request.method == "POST":
-
         form = ExamensForm(request.POST)
         if form.is_valid():
-
-
             examens = form.save(commit=False)
-
-
             examens.save()
             return HttpResponseRedirect("/gestion/home/")
 
         else:
-            return render(request, "gestion/ajout_exa.html", {"form": form})
+            return render(request,"gestion/ajout_exa.html",{"form": form})
     else:
         form = ExamensForm()
-        return render(request, "gestion/ajout_exa.html", {"form": form})
+        return render(request,"gestion/ajout_exa.html",{"form": form})
 
 
 def traitement_exa(request):
@@ -132,7 +125,7 @@ def traitement_exa(request):
         examens.save()
         return HttpResponseRedirect("/gestion/home/"+ str(id))
     else:
-        return render(request, "gestion/ajout_exa.html", {"form": form})
+        return render(request,"gestion/ajout_exa.html",{"form": form})
 
 def affiche_exa(request, id):
     examens = models.Examens.objects.get(pk=id)
@@ -143,7 +136,7 @@ def affiche_exa(request, id):
 def update_exa(request, id):
     examens = models.Examens.objects.get(pk=id)
     exform = ExamensForm(examens.dico())
-    return render(request, "gestion/update_exa.html", {"exform": exform,"id":id})
+    return render(request,"gestion/update_exa.html",{"exform": exform,"id":id})
 
 def traitementupdate_exa(request, id):
     exform = ExamensForm(request.POST, request.FILES)
@@ -153,7 +146,7 @@ def traitementupdate_exa(request, id):
         examens.save()
         return HttpResponseRedirect("/gestion/examens")
     else:
-        return render(request, "gestion/update_exa.html", {"exform": exform, "id": id})
+        return render(request,"gestion/update_exa.html",{"exform": exform, "id": id})
 
 
 def delete_exa(request, id):
@@ -168,7 +161,7 @@ def delete_exa(request, id):
 
 def note(request):
     liste_note = list(models.Notes.objects.all())
-    return render(request, 'note/note.html ', {'liste_note': liste_note})
+    return render(request,'note/note.html',{'liste_note': liste_note})
 
 def ajout_note(request):
     if request.method == "POST":
@@ -190,7 +183,6 @@ def traitement_note(request):
     #examens = models.Examens.objects.get(pk=id)
     if form.is_valid():
         note = form.save(commit=False)
-
         #note.examens = examens
         #note.examens_id = id
         note.save()
@@ -206,7 +198,7 @@ def affiche_note(request, id):
 def update_note(request, id):
     note = models.Notes.objects.get(pk=id)
     nform = NotesForm(note.dico())
-    return render(request, "note/update_note.html", {"nform": nform,"id":id})
+    return render(request,"note/update_note.html",{"nform": nform,"id":id})
 
 def traitementupdate_note(request, id):
     nform = NotesForm(request.POST, request.FILES)
@@ -216,7 +208,7 @@ def traitementupdate_note(request, id):
         note.save()
         return HttpResponseRedirect("/note/ajout_note")
     else:
-        return render(request, "note/update_note.html", {"nform": nform, "id": id})
+        return render(request,"note/update_note.html",{"nform": nform, "id": id})
 
 
 def delete_note(request, id):
@@ -230,7 +222,7 @@ def delete_note(request, id):
 #############################################
 
 def UE(request):
-    return render(request, "gestion/UE.html")
+    return render(request,"gestion/UE.html")
 
 
 
@@ -244,10 +236,10 @@ def aUnite(request):
             return HttpResponseRedirect("/gestion/home/" ,{"UE": UE})
 
         else:
-            return render(request, "gestion/aUnite.html", {"form": form})
+            return render(request,"gestion/aUnite.html",{"form": form})
     else:
         form = UniteForm()
-        return render(request, "gestion/aUnite.html", {"form": form})
+        return render(request,"gestion/aUnite.html",{"form": form})
 
 def tUnite(request):
     form = UniteForm(request.POST, request.FILES)
@@ -255,13 +247,13 @@ def tUnite(request):
         UE = form.save()
         return HttpResponseRedirect("/gestion/home")
     else:
-        return render(request, "gestion/aUnite.html", {"form": form})
+        return render(request,"gestion/aUnite.html",{"form": form})
 
 def UEupdate(request, id):
 
     UE = models.UE.objects.get(pk=id)
     form = UniteForm(UE.dico())
-    return render(request, "gestion/UEupdate.html", {"form": form,"id":id})
+    return render(request,"gestion/UEupdate.html",{"form": form,"id":id})
 
 def tuUE(request, id):
     eform = UniteForm(request.POST, request.FILES)
@@ -271,7 +263,7 @@ def tuUE(request, id):
         UE.save()
         return HttpResponseRedirect("/gestion/home")
     else:
-        return render(request, "gestion/UEupdate.html", {"eform": eform, "id": id})
+        return render(request,"gestion/UEupdate.html",{"eform": eform, "id": id})
 
 def affiche_ue(request, id):
     UE = models.UE.objects.get(pk=id)
@@ -287,7 +279,7 @@ def delUE(request, id):
     return HttpResponseRedirect("/gestion/home")
 
 def ressourcess(request):
-    return render(request, "gestion/ressources.html")
+    return render(request,"gestion/ressources.html")
 
 def ajoutressources(request):
     if request.method == "POST":
@@ -295,13 +287,13 @@ def ajoutressources(request):
         form = RessourcesForm(request)
         if form.is_valid():
             ressources = form.save()
-            return render(request, "/gestion/affiche_res.html", {"ressources": ressources})
+            return render(request,"/gestion/affiche_res.html",{"ressources": ressources})
 
         else:
-            return render(request, "gestion/ajoutressources.html", {"form": form})
+            return render(request,"gestion/ajoutressources.html",{"form": form})
     else:
         form = RessourcesForm()
-        return render(request, "gestion/ajoutressources.html", {"form": form})
+        return render(request,"gestion/ajoutressources.html",{"form": form})
 
 def traitementressources(request):
     form = RessourcesForm(request.POST, request.FILES)
@@ -309,12 +301,12 @@ def traitementressources(request):
         ressources = form.save()
         return HttpResponseRedirect("/gestion/home")
     else:
-        return render(request, "gestion/ajoutressources.html", {"form": form})
+        return render(request,"gestion/ajoutressources.html",{"form": form})
 
 def updateressources(request, id):
     ressources = models.Ressources.objects.get(pk=id)
     rform = RessourcesForm(ressources.dico())
-    return render(request, "gestion/updateressources.html",{"ressources": ressources,"rform": rform,"id":id})
+    return render(request,"gestion/updateressources.html",{"ressources": ressources,"rform": rform,"id":id})
 
 def traitementupdateressources(request, id):
     rform = RessourcesForm(request.POST, request.FILES)
@@ -324,7 +316,7 @@ def traitementupdateressources(request, id):
         ressources.save()
         return HttpResponseRedirect("/gestion/home")
     else:
-        return render(request, "gestion/updateressources.html", {"rform": rform, "id": id})
+        return render(request,"gestion/updateressources.html",{"rform": rform, "id": id})
 
 def affiche_res(request, id):
     ressources = models.Ressources.objects.get(pk=id)
@@ -339,7 +331,7 @@ def deleteressources(request, id):
     return HttpResponseRedirect("/gestion/home/")
 
 def enseignant(request):
-    return render(request, "gestion/enseignant.html")
+    return render(request,"gestion/enseignant.html")
 
 def ajoutenseignant(request):
     if request.method == "POST":
@@ -347,13 +339,13 @@ def ajoutenseignant(request):
         form = EnseignantForm(request)
         if form.is_valid():
             enseignant = form.save()
-            return render(request, "/gestion/affiche.html", {"enseignant": enseignant})
+            return render(request,"/gestion/affiche.html",{"enseignant": enseignant})
 
         else:
-            return render(request, "gestion/ajoutenseignant.html", {"form": form})
+            return render(request,"gestion/ajoutenseignant.html",{"form": form})
     else:
         form = EnseignantForm()
-        return render(request, "gestion/ajoutenseignant.html", {"form": form})
+        return render(request,"gestion/ajoutenseignant.html",{"form": form})
 
 def traitementenseignant(request):
     form = EnseignantForm(request.POST, request.FILES)
@@ -361,12 +353,12 @@ def traitementenseignant(request):
         enseignant = form.save()
         return HttpResponseRedirect("/gestion/home")
     else:
-        return render(request, "gestion/ajoutenseignant.html", {"form": form})
+        return render(request,"gestion/ajoutenseignant.html",{"form": form})
 
 def updateenseignant(request, id):
     enseignant = models.Enseignant.objects.get(pk=id)
     lform = EnseignantForm(enseignant.dico())
-    return render(request, "gestion/updateenseignant.html", {"lform": lform,"id":id})
+    return render(request,"gestion/updateenseignant.html",{"lform": lform,"id":id})
 
 def traitementupdateenseignant(request, id):
     lform = EnseignantForm(request.POST, request.FILES)
@@ -376,7 +368,7 @@ def traitementupdateenseignant(request, id):
         enseignant.save()
         return HttpResponseRedirect("/gestion/ajoutenseignant")
     else:
-        return render(request, "gestion/updateenseignant.html", {"lform": lform, "id": id})
+        return render(request,"gestion/updateenseignant.html",{"lform": lform, "id": id})
 
 def deleteenseignant(request, id):
     enseignant = models.Enseignant.objects.get(pk=id)
