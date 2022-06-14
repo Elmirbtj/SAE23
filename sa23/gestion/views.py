@@ -51,18 +51,22 @@ def traitement(request):
     else:
         return render(request,"gestion/ajout.html",{"form": form})
 
+# id = id d'un étudiant
 def affiche(request, id):
-    etudiants = models.Etudiant.objects.get(pk=id)
-    notes = list(models.Notes.objects.filter(etudiant=etudiants))
-    notes = list(models.Notes.objects.filter(etudiant=etudiants))
-    moyenne = float(0)
-    moyenne_arondie = 0
+    etudiant = models.Etudiant.objects.get(pk=id)
+    notes = list(models.Notes.objects.filter(etudiant=etudiant))
+    moyenne = 0.0
+    coeff = 0.0
     for i in notes:
-        moyenne = float(moyenne + i.note)
-    etudiants.moyenne = str(round(moyenne / len(notes),2))
+        examen = models.Examens.objects.get(id=i.examens.id)
+        moyenne = moyenne + i.note * float(examen.coefficient)
+        coeff = coeff + float(examen.coefficient)
+        print(f'{i.note} / {examen.coefficient}')
 
-
-    return render(request,"gestion/affiche.html",{'etudiants': etudiants,'notes': notes,"etudiants.moyenne":etudiants.moyenne,})
+    if coeff != 0:
+        moyenne = round(moyenne/coeff,2)
+        print(f'{moyenne}')
+    return render(request,"gestion/affiche.html",{'etudiants': etudiant,'notes': notes,"moyenne":moyenne})
 
 
 
@@ -228,13 +232,16 @@ def delete_note(request, id):
 def UE(request):
     return render(request, "gestion/UE.html")
 
+
+
 def aUnite(request):
     if request.method == "POST":
 
-        form = UniteForm(request)
+        form = UniteForm(request.POST)
         if form.is_valid():
-            UE = form.save()
-            return render(request, "/gestion/affiche_ue.html", {"UE": UE})
+            UE = form.save(commit=False)
+            UE.save()
+            return HttpResponseRedirect("/gestion/home/" ,{"UE": UE})
 
         else:
             return render(request, "gestion/aUnite.html", {"form": form})
