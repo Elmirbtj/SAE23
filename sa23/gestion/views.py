@@ -4,10 +4,12 @@ from django.http import HttpResponseRedirect
 from .forms import EtudiantForm
 from .forms import ExamensForm
 from .forms import NotesForm
-
+from fpdf import FPDF
 from .forms import UniteForm
 from .forms import RessourcesForm
 from .forms import EnseignantForm
+from django.http import FileResponse
+from django.shortcuts import render
 
 
 
@@ -375,3 +377,31 @@ def deleteenseignant(request, id):
     enseignant = models.Enseignant.objects.get(pk=id)
     enseignant.delete()
     return HttpResponseRedirect("/gestion/home")
+
+
+def notes_pdf(request ,id):
+    etudiant = models.Etudiant.objects.get(pk=id)
+    notes = list(models.Notes.objects.filter(etudiant=etudiant))
+    pdf = FPDF()
+    pdf.add_page()
+    pdf.set_font('Arial', size=16)
+    moyenne = 0.0
+    coeff = 0.0
+    pdf.cell(200, 10, txt="Relever de note", ln=2, align='C')
+    pdf.cell(200, 10, txt="Nom de l'etudiant"+ str(etudiant.nom),ln=2, align='C')
+    for i in notes:
+        examen = models.Examens.objects.get(id=i.examens.id)
+
+        moyenne = moyenne + i.note * float(examen.coefficient)
+        coeff = coeff + float(examen.coefficient)
+        print(f'{i.note} / {examen.coefficient}')
+    if coeff != 0:
+        moyenne = round(moyenne/coeff,2)
+        print(f'{moyenne}')
+    pdf.cell(200, 10, txt="note" + str(note), ln=2, align='C')
+    pdf.cell(200, 10, txt="Moyenne" + str(moyenne), ln=2, align='C')
+    pdf.output('Note.pdf')
+    response =FileResponse(open("Note.pdf"))
+    return response
+
+
