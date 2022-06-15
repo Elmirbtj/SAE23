@@ -106,6 +106,7 @@ input[type=submit],button{
     #background:#404040;
     font-family:system-ui,arial;
     font-size:130%;
+    padding: revert;
 }
 
 input[type=text],input[type=number],textarea,select,option{

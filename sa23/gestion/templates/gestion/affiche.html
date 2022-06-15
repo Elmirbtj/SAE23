@@ -12,9 +12,9 @@
 
 
 <h1>
-Moyenne de l'etudiant : {{moyenne}}
 
-    {{moyenne_arondie}}
+
+
 
 </h1>
 
@@ -27,35 +27,30 @@ Moyenne de l'etudiant : {{moyenne}}
 <tr>
 <th>Examens</th>
 <th> note</th>
+<th> coeff</th>
 </tr>
 {% for l in notes %}
 <tr>
 <td>{{l.examens}}</td>
 <td>{{l.note}}/20</td>
 <td>{{examen.coefficient}}</td>
+     <td>{{examen.coefficient}}</td>
+
 </tr>
 
 {%endfor%}
 <td>Moyenne de l'etudiant </td>
-<td>{{moyenne}}</td>
+<td> {{moyenne}}</td>
+<td> {{coeff}}</td>
+
 </table>
 
 
+     {% for l in examens %}
+<td>{{l.coefficient}}</td>
+     {%endfor%}
+{{examen.coefficient.id}}
 
-
-
-
-     <h1>l'etudiant :{{l.etudiant}} a eu la note de {{l.note}}/20, dans l'examens de {{l.examens}} </h1>
-     <h1>{{etudiants.email}}</h1>
-     <h1>{{l.appreciation}}</h1>
-
-
-{% endblock %}
-
-
-
-{% block navi %}
- <li> <a href="/gestion/ajout2/{{etudiant.id}}"> Pour apres</a></li>
 {% endblock %}
 
 

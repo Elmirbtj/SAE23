@@ -57,6 +57,7 @@ def affiche(request, id):
     coeff = 0.0
     for i in notes:
         examen = models.Examens.objects.get(id=i.examens.id)
+
         moyenne = moyenne + i.note * float(examen.coefficient)
         coeff = coeff + float(examen.coefficient)
         print(f'{i.note} / {examen.coefficient}')
@@ -64,7 +65,7 @@ def affiche(request, id):
     if coeff != 0:
         moyenne = round(moyenne/coeff,2)
         print(f'{moyenne}')
-    return render(request,"gestion/affiche.html",{'etudiants': etudiant,'notes': notes,"moyenne":moyenne,"examen": examen})
+    return render(request,"gestion/affiche.html",{'etudiants': etudiant,'notes': notes,"moyenne":moyenne,"examen": examen,"coefff":examen.coefficient,"coeff":coeff})
 
 
 
