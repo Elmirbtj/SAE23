@@ -33,7 +33,7 @@ class Notes(models.Model):
     examens = models.ForeignKey('Examens', on_delete=models.CASCADE,null = True,)
     etudiant =models.ForeignKey('Etudiant', on_delete=models.CASCADE,null = True,)
     note =models.IntegerField(blank=False, null=True)
-    appreciation =models.CharField(max_length=100)
+    appreciation =models.TextField(null=True, blank=True)
 
 
     def __str__(self):
@@ -50,7 +50,7 @@ class UE(models.Model):
     code = models.IntegerField(blank=False, null=True)
     nom = models.CharField(max_length=100)
     semestre = models.IntegerField(blank=False, null=True)
-    credit = models.CharField(max_length=100)
+    credit = models.IntegerField(blank=False, null=True)
 
     def __str__(self):
         return  self.nom
@@ -61,7 +61,7 @@ class UE(models.Model):
 class Ressources(models.Model):
     code_ressource = models.CharField(max_length=100)
     nom = models.CharField(max_length=100)
-    descriptif = models.CharField(max_length=100)
+    descriptif = models.TextField(null=True, blank=True)
     coefficient = models.CharField(max_length=100)
     competence = models.ManyToManyField("UE",null=True, blank=True)
 
@@ -82,4 +82,5 @@ class Enseignant(models.Model):
 
     def dico(self):
         return {"nom": self.nom,"prenom": self.prenom,}
+
 

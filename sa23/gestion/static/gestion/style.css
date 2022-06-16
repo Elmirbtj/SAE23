@@ -116,16 +116,16 @@ input[type=text],input[type=number],textarea,select,option{
 
 
 form{
-     background-color:	#404040;
-    display:flex;
-    justify-content:center;
+
     flex-direction:column;
     align-items:center;
-    margin-top:75px;
-    width:65%;
+    margin-top:25px;
+    width:45%;
+    height: auto;
     border-radius:5px;
-    box-shadow:1px 1px 1px 1px #A9A9A9;
-
+    box-shadow:10px 10px 10px 10px #A9A9A9;
+    margin:25px;
+    text-align: -webkit-center;
 }
 
 

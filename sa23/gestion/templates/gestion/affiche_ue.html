@@ -14,19 +14,14 @@
 
 
 <ul class="ul1">
-<h1>   {{l.nom}}<br>
-{{l.descriptif}}
+<h1>Cette competence fait partie de la ressource : {{l.nom}}<br>
+
+Descriptif :{{l.descriptif}}
 
 </h1>
-{{UE.nom}}
-{{UE.credit}}
+<h1>Le nombre de crédit ECTS : {{UE.credit}}</h1>
     <li class="li1">
-
-
-
-
-
-        <button name="button"><a href="/gestion/affiche_ue{{l.id}}"> afficher les détails  </a></button> <br>
+   <button name="button"><a href="/gestion/affiche_ue{{l.id}}"> afficher les détails  </a></button> <br>
         <button name="button"><a href="/gestion/deleteressources/{{l.id}}"> effacer  </a></button> <br>
 <button name="button"><a href="/gestion/updateressources/{{l.id}}"> update </a></button>   </li>
 
@@ -40,7 +35,3 @@
 
 {% endblock %}
 
-
-{% block navi %}
- <li> <a href="/gestion/ajout_exa/"> ajouter un examens | </a></li>
-{% endblock %}

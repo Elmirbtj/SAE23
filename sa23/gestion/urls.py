@@ -57,8 +57,8 @@ urlpatterns = [
     path("updateenseignant/<int:id>", views.updateenseignant),
     path("deleteenseignant/<int:id>", views.deleteenseignant),
 
+
     path("notes_pdf/<int:id>", views.notes_pdf),
-
-
+    path("note_csv/<int:id>", views.note_csv),
 
 ]

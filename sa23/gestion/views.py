@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from . import models
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect ,HttpResponse
 from .forms import EtudiantForm
 from .forms import ExamensForm
 from .forms import NotesForm
@@ -10,6 +10,7 @@ from .forms import RessourcesForm
 from .forms import EnseignantForm
 from django.http import FileResponse
 from django.shortcuts import render
+import csv
 
 
 
@@ -133,7 +134,6 @@ def traitement_exa(request):
 def affiche_exa(request, id):
     examens = models.Examens.objects.get(pk=id)
     liste1 = list(models.Notes.objects.filter(examens=examens))
-
     return render(request,"gestion/affiche_exa.html",{"examens": examens ,"liste1":liste1})
 
 def update_exa(request, id):
@@ -151,16 +151,11 @@ def traitementupdate_exa(request, id):
     else:
         return render(request,"gestion/update_exa.html",{"exform": exform, "id": id})
 
-
 def delete_exa(request, id):
     examens = models.Examens.objects.get(pk=id)
     examens_id = examens.ressources_id
     examens.delete()
     return HttpResponseRedirect(f"/gestion/affiche_res/{examens_id}")
-
-
-
-
 
 def note(request):
     liste_note = list(models.Notes.objects.all())
@@ -195,7 +190,6 @@ def traitement_note(request):
 
 def affiche_note(request, id):
     note = models.Notes.objects.get(pk=id)
-
     return render(request,"note/affiche_note.html",{"note": note})
 
 def update_note(request, id):
@@ -225,13 +219,13 @@ def delete_note(request, id):
 #############################################
 
 def UE(request):
-    return render(request,"gestion/UE.html")
+    UE =  list(models.UE.objects.all())
+    return render(request,"gestion/UE.html",{"UE": UE})
 
 
 
 def aUnite(request):
     if request.method == "POST":
-
         form = UniteForm(request.POST)
         if form.is_valid():
             UE = form.save(commit=False)
@@ -253,7 +247,6 @@ def tUnite(request):
         return render(request,"gestion/aUnite.html",{"form": form})
 
 def UEupdate(request, id):
-
     UE = models.UE.objects.get(pk=id)
     form = UniteForm(UE.dico())
     return render(request,"gestion/UEupdate.html",{"form": form,"id":id})
@@ -271,8 +264,6 @@ def tuUE(request, id):
 def affiche_ue(request, id):
     UE = models.UE.objects.get(pk=id)
     ressources = list(models.Ressources.objects.filter(competence=UE))
-
-
     return render(request,"gestion/affiche_ue.html",{'UE': UE,'ressources':ressources})
 
 
@@ -286,12 +277,10 @@ def ressourcess(request):
 
 def ajoutressources(request):
     if request.method == "POST":
-
         form = RessourcesForm(request)
         if form.is_valid():
             ressources = form.save()
             return render(request,"/gestion/affiche_res.html",{"ressources": ressources})
-
         else:
             return render(request,"gestion/ajoutressources.html",{"form": form})
     else:
@@ -324,8 +313,6 @@ def traitementupdateressources(request, id):
 def affiche_res(request, id):
     ressources = models.Ressources.objects.get(pk=id)
     liste7 = list(models.Examens.objects.filter(ressources=ressources))
-
-
     return render(request,"gestion/affiche_res.html",{"ressources": ressources,"liste7": liste7})
 
 def deleteressources(request, id):
@@ -378,7 +365,6 @@ def deleteenseignant(request, id):
     enseignant.delete()
     return HttpResponseRedirect("/gestion/home")
 
-
 def notes_pdf(request ,id):
     etudiant = models.Etudiant.objects.get(pk=id)
     notes = list(models.Notes.objects.filter(etudiant=etudiant))
@@ -388,20 +374,36 @@ def notes_pdf(request ,id):
     moyenne = 0.0
     coeff = 0.0
     pdf.cell(200, 10, txt="Relever de note", ln=2, align='C')
-    pdf.cell(200, 10, txt="Nom de l'etudiant"+ str(etudiant.nom),ln=2, align='C')
+    pdf.cell(200, 10, txt="Nom de l'etudiant "+ str(etudiant.nom),ln=2, align='C')
     for i in notes:
         examen = models.Examens.objects.get(id=i.examens.id)
-
         moyenne = moyenne + i.note * float(examen.coefficient)
         coeff = coeff + float(examen.coefficient)
         print(f'{i.note} / {examen.coefficient}')
+        pdf.cell(200, 10, txt=f"note  {str(i.note)}", ln=2, align='C')
     if coeff != 0:
         moyenne = round(moyenne/coeff,2)
         print(f'{moyenne}')
-    pdf.cell(200, 10, txt="note" + str(note), ln=2, align='C')
     pdf.cell(200, 10, txt="Moyenne" + str(moyenne), ln=2, align='C')
     pdf.output('Note.pdf')
-    response =FileResponse(open("Note.pdf"))
+    response = FileResponse(open("Note.pdf"))
     return response
 
 
+
+
+def note_csv(request,id):
+    response = HttpResponse(content_type='text/csv')
+    response['Content-Dispostion'] = 'attachment; filename=note_csv.csv'
+
+    writer = csv.writer(response)
+
+    note = models.Notes.objects.all()
+
+    writer.writerow(['examens','etudiant','note','appreciation'])
+
+
+    for note in note:
+        writer.writerow([note.etudiant,note.examens,note.note,note.appreciation])
+
+    return response
