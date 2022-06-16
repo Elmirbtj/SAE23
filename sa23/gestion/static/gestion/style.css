@@ -112,6 +112,7 @@ input[type=submit],button{
 input[type=text],input[type=number],textarea,select,option{
     color:black;
     font-family:system-ui,arial;
+
 }
 
 
