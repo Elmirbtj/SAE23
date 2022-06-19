@@ -5,6 +5,7 @@ from .views import *
 
 urlpatterns = [
     path('etudiant/', views.etudiant),
+    path('', views.home),
     path('home/', views.home),
     path('ajout/', views.ajout),
     path('traitement/', views.traitement),
@@ -53,7 +54,7 @@ urlpatterns = [
     path('enseignant/', views.enseignant),
     path('ajoutenseignant/', views.ajoutenseignant),
     path('traitementenseignant/', views.traitementenseignant),
-    path('traitementupdateenseignant/', views.traitementupdateenseignant),
+    path('traitementupdateenseignant/<int:id>/', views.traitementupdateenseignant),
     path("updateenseignant/<int:id>", views.updateenseignant),
     path("deleteenseignant/<int:id>", views.deleteenseignant),
 

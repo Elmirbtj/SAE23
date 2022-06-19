@@ -83,7 +83,7 @@ def traitementupdate(request, id):
         etudiant = eform.save(commit=False)
         etudiant.id = id
         etudiant.save()
-        return HttpResponseRedirect("/gestion/ajout")
+        return HttpResponseRedirect("/gestion/home/")
     else:
         return render(request,"gestion/update.html",{"eform": eform, "id": id})
 
@@ -203,7 +203,7 @@ def traitementupdate_note(request, id):
         note = nform.save(commit=False)
         note.id = id
         note.save()
-        return HttpResponseRedirect("/note/ajout_note")
+        return HttpResponseRedirect("/gestion/home/")
     else:
         return render(request,"note/update_note.html",{"nform": nform, "id": id})
 
@@ -356,7 +356,7 @@ def traitementupdateenseignant(request, id):
         enseignant = lform.save(commit=False)
         enseignant.id = id
         enseignant.save()
-        return HttpResponseRedirect("/gestion/ajoutenseignant")
+        return HttpResponseRedirect("/gestion/home/")
     else:
         return render(request,"gestion/updateenseignant.html",{"lform": lform, "id": id})
 
