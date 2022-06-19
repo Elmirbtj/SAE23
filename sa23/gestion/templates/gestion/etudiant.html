@@ -22,16 +22,13 @@
 <button name="button"><a href="/gestion/delete/{{l.id}}"> effacer  </a></button>
 <button name="button"><a href="/gestion/update/{{l.id}}"> update </a></button>
 <button name="button"><a href="/gestion/note_csv/{{l.id}}"> CSV </a></button>
-
+<button name="button"><a href="/gestion/notes_pdf/{{l.id}}" target="blank"> PDF </a></button>
 </li>
 </div>
 </div>
 {%endfor%}
 {% endblock %}
-<style>
-{% load static %}
-body{background-color: brown;}
-</style>
+
 <h1>{{etudiants.nom}}</h1>
 <h1>{{etudiants.email}}</h1>
 {% for l in notes %}
